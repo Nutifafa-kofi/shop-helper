@@ -6,12 +6,13 @@ function calculateTotalCost(pricePerCup, numberOfCups) {
 
 console.log(calculateTotalCost(5, 16));
 
-//Discount given on the oders above 10
+//Discount applied
 function applyDiscount(pricePerCup, numberOfCups, discountPercent) {
-  let totalCost = pricePerCup * numberOfCups;
-  let discountGiven = totalCost * (discountPercent / 100);
-  let finalPrice = totalCost - discountGiven;
+  let totalCost = calculateTotalCost(pricePerCup, numberOfCups);
+
   if (numberOfCups > 10) {
+    let discountGiven = totalCost * (discountPercent / 100);
+    let finalPrice = totalCost - discountGiven;
     return finalPrice;
   } else {
     return totalCost;
@@ -21,11 +22,10 @@ function applyDiscount(pricePerCup, numberOfCups, discountPercent) {
 console.log(applyDiscount(5, 30, 50));
 
 //USD to GHS conversion
-function USDToGHS(pricePerCup, numberOfCups) {
-  let totalCost = pricePerCup * numberOfCups;
-  const exchangeRate = 10.9;
+function usdToGHS(pricePerCup,numberOfCups, exchangeRate) {
+  let totalCost = calculateTotalCost(pricePerCup, numberOfCups);
   let GHS = totalCost * exchangeRate;
   return GHS;
 }
 
-console.log(USDToGHS(5, 16));
+console.log(usdToGHS(5, 16, 10.9));
