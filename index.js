@@ -30,22 +30,57 @@
 
 // console.log(usdToGHS(5, 16, 10.9));
 
-let shoe = { brand: "Adidas", color: "Red", price: 300, inStock: 10 };
+let shoe = {
+  brand: "Adidas",
+  color: "Red",
+  price: 300,
+  quantity: 5,
+  restock: 10,
+};
 function newStock(shoe, addedStock) {
-  shoe.inStock += addedStock;
-  return shoe.inStock;
+  shoe.quantity += addedStock;
+  return shoe.quantity;
 }
 
 console.log(newStock(shoe, 5));
 
 function stockSold(shoe, quantitySold) {
-  if (shoe.inStock >= quantitySold) {
-    shoe.inStock -= quantitySold;
-   return `${quantitySold} items are sold out`;
+  if (quantitySold <= shoe.quantity) {
+    shoe.quantity -= quantitySold;
+    return `${quantitySold} are sold out. Remaining ${shoe.quantity}`;
   } else {
-    return shoe.inStock;
+    return `Not enough available only ${shoe.quantity} is left`;
+  }
+}
+console.log(stockSold(shoe, 4));
+
+function checkRestock(shoe) {
+  if (shoe.quantity < shoe.restock) {
+    return `${shoe.brand} is below restock. Order now`;
+  } else {
+    return `${shoe.brand} is in abundance`;
   }
 }
 
-console.log(stockSold(shoe, 5));
+console.log(checkRestock(shoe));
 
+function transaction(shoe, quantityBought) {
+  let totalCost;
+  if (quantityBought > shoe.quantity) {
+    return `Not enough stock available. Only ${shoe.quantity} left`;
+  } else {
+    totalCost = shoe.price * quantityBought;
+    shoe.quantity -= quantityBought;
+
+    let output = `
+    Transaction Successful!
+    Brand: ${shoe.brand}
+    Quantity Bought: ${quantityBought}
+    Total Cost: ${totalCost}
+    Remaining Stock: ${shoe.quantity}`;
+
+    return output;
+  }
+}
+
+console.log(transaction(shoe, 2));
