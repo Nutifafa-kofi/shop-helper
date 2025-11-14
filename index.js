@@ -30,6 +30,7 @@
 
 // console.log(usdToGHS(5, 16, 10.9));
 
+//Shoe Object
 let shoe = {
   brand: "Adidas",
   color: "Red",
@@ -37,13 +38,15 @@ let shoe = {
   quantity: 5,
   restock: 10,
 };
+
+//Added a New Stock
 function newStock(shoe, addedStock) {
   shoe.quantity += addedStock;
   return shoe.quantity;
 }
-
 console.log(newStock(shoe, 5));
 
+//Stock Sold
 function stockSold(shoe, quantitySold) {
   if (quantitySold <= shoe.quantity) {
     shoe.quantity -= quantitySold;
@@ -54,6 +57,7 @@ function stockSold(shoe, quantitySold) {
 }
 console.log(stockSold(shoe, 4));
 
+//Check Restock
 function checkRestock(shoe) {
   if (shoe.quantity < shoe.restock) {
     return `${shoe.brand} is below restock. Order now`;
@@ -61,9 +65,9 @@ function checkRestock(shoe) {
     return `${shoe.brand} is in abundance`;
   }
 }
-
 console.log(checkRestock(shoe));
 
+//Transaction Simulate
 function transaction(shoe, quantityBought) {
   let totalCost;
   if (quantityBought > shoe.quantity) {
@@ -73,12 +77,13 @@ function transaction(shoe, quantityBought) {
     shoe.quantity -= quantityBought;
 
     let output = `
-    Transaction Successful!
-    Brand: ${shoe.brand}
-    Quantity Bought: ${quantityBought}
-    Total Cost: ${totalCost}
-    Remaining Stock: ${shoe.quantity}`;
-
+Transaction Successful!
+Brand: ${shoe.brand}
+Quantity Bought: ${quantityBought}
+Total Cost: ${totalCost}
+Remaining Stock: ${shoe.quantity}
+${checkRestock(shoe)}
+`;
     return output;
   }
 }
